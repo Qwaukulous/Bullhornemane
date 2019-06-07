@@ -1,11 +1,94 @@
-
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Base Page</title>
+    <title>base</title>
+
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
+
+<!--NavBar-->
+<div th:fragment="navlinks" id="navlinks">
+
+    <div sec:authorize="isAnonymous()">
+        <nav class="navbar navbar-expand-sm">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="/add">Add a Message</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/register">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/secure">Login</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div sec:authorize="isAuthenticated()">
+        <nav class="navbar navbar-expand-sm">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/" th:inline="text">Hello, [[${user.username}]]</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="/add">Add a Message</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user">My Messages</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Log Out</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+</div>
+
+
+<!--Header-->
+<div th:fragment="header">
+    <div>
+        <div class="headerBanner">
+            <div class="banner">
+                <h1>RIPPLE</h1>
+                <h4>Post your thoughts</h4>
+                <img src="https://res.cloudinary.com/dumb6xi6z/image/upload/v1559921477/ezhhi3w0cjhtfqqbhzo.png" width="100%" hieght="80px"/>
+            </div>
+        </div>
+        <div class="headerstrip">
+            <div style="background-color: #00334e; height: 4px; width: 100%;">
+                <div style="padding-top: 5px" sec:authorize="isAnonymous()">
+                    <img src= "https://res.cloudinary.com/dumb6xi6z/image/upload/v1559921477/ezhhi3w0cjhtfqqbhzo.png" alt="Profile Icon"/>
+                </div>
+
+                <div style="padding-top: 5px" sec:authorize="isAuthenticated()">
+                    <img th:src="" alt="Profile Icon"/>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--Bootstrap JS-->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 
 </body>
 </html>
